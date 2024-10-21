@@ -1,0 +1,96 @@
+#submitButton {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#submitButton:hover {
+  background-color: #45a049;
+}
+
+h1{
+
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  background-color: powderblue;
+  color: black;
+
+}
+
+h3 {
+  text-align: center;
+}
+
+label {
+  display: inline-block;
+  width: 50px;
+}
+        
+input {
+  width: 50px;
+  height: 20px;
+}
+
+.page {
+  background-color: rgb(102, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,1.0);
+  padding: 20px;
+  width: 300px;
+  text-decoration-color: whitesmoke;
+
+
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+}
+
+.input-group {
+  margin-bottom: 10px;
+}
+
+#pageTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5em;
+}
+
+
+#nextButton {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#nextButton:hover {
+  background-color: #0056b3;
+}
+
+#inputContainer{
+  text-align: left;
+}
+
+body {
+  background-image: url('https://media.istockphoto.com/id/173598452/photo/university-in-autumn.jpg?s=612x612&w=0&k=20&c=jQqpZuTZ6qXIfWqnCW5nqlExJZO0PO47L-ZiaE8jIk0='); /* Path to your image */
+  background-size: cover; /* Ensure the image covers the entire page */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Keep the background fixed on scroll */
+  height: 100vh; /* Ensure body takes full viewport height */
+  margin: 0; /* Remove any default margin */
+
+}
+

@@ -19,7 +19,6 @@ h1{
   text-align: center;
   border: none;
   border-radius: 5px;
-  background-color: powderblue;
   color: black;
 
 }
@@ -84,7 +83,7 @@ input {
 }
 
 body {
-  background-image: url('https://media.istockphoto.com/id/173598452/photo/university-in-autumn.jpg?s=612x612&w=0&k=20&c=jQqpZuTZ6qXIfWqnCW5nqlExJZO0PO47L-ZiaE8jIk0='); /* Path to your image */
+  background-image: url('https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?cs=srgb&dl=pexels-pixabay-256490.jpg&fm=jpg'); /* Path to your image */
   background-size: cover; /* Ensure the image covers the entire page */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent the image from repeating */

@@ -1,16 +1,6 @@
-
-
-/**********************************************************************/
-/**********************************************************************/
-/**********************************************************************/
-/**********************************************************************/
-/**********************************************************************/
-/**********************************************************************/
-
 const inputContainer = document.getElementById('inputContainer');
 const nextButton = document.getElementById('nextButton');
-const totalInputs = 10;
-const inputsPerPage = 3;//adjustable
+const totalInputs = 34;
 
 // Define the mapping of SDG titles to input ranges
 const sdgMapping = {
@@ -18,49 +8,35 @@ const sdgMapping = {
     'SDG02': [3, 4], 
     'SDG03': [5, 6],
     'SDG04': [7, 8],
-    'SDG'
-    // Add other SDG mappings here...
+    'SDG05': [9, 12],
+    'SDG06': [13, 14],
+    'SDG07': [15, 17],
+    'SDG09': [18, 18],
+    'SDG10': [19, 19],
+    'SDG11': [20, 21],
+    'SDG12': [22, 24],
+    'SDG13': [25, 26],
+    'SDG14': [27, 27],
+    'SDG15': [28, 28],
+    'SDG16': [29, 29],
+    'SDG17': [30, 34]
 };
 
 let currentPage = 0;
 let userInputs = {};
-const pageTitles = [
-    "SDG01",
-    "SDG02",
-    "SDG03",
-    "SDG04",
-    "SDG05",
-    "SDG06",
-    "SDG07",
-    "SDG08",
-    "SDG09",
-    "SDG010",
-    "SDG011",
-    "SDG012",
-    "SDG013",
-    "SDG014",
-    "SDG015",
-    "SDG016",
-    "SDG017",
-    // Add more titles as needed
-];
-
+const pageTitles = Object.keys(sdgMapping);
 
 function createInputs(sdgTitle) {
-    // Clear the existing inputs
     inputContainer.innerHTML = '';
 
-    // Get the input range for the selected SDG title
     const inputRange = sdgMapping[sdgTitle];
     if (!inputRange) {
         console.error('No input range found for', sdgTitle);
         return;
     }
 
-    // Destructure the start and end values from the input range
     const [start, end] = inputRange;
 
-    // Generate input fields for the specified range
     for (let i = start; i <= end; i++) {
         const inputGroup = document.createElement('div');
         inputGroup.className = 'input-group';
@@ -73,12 +49,10 @@ function createInputs(sdgTitle) {
         inputField.id = `i${i}`;
         inputField.value = userInputs[`i${i}`] || '';
 
-        // Use only one event listener, 'input' for real-time updates
         inputField.addEventListener('input', (e) => {
             userInputs[`i${i}`] = e.target.value;
         });
 
-        // Append the label and input field to the container
         inputGroup.appendChild(label);
         inputGroup.appendChild(inputField);
         inputContainer.appendChild(inputGroup);
@@ -86,21 +60,16 @@ function createInputs(sdgTitle) {
 }
 
 function updatePage() {
-    const start = currentPage * inputsPerPage + 1;
-    const end = Math.min(start + inputsPerPage - 1, totalInputs);
-    
-    // Update the page title
     const pageTitle = document.getElementById('pageTitle');
     pageTitle.textContent = pageTitles[currentPage] || `Page ${currentPage + 1}`;
 
-    createInputs(start, end);
+    createInputs(pageTitles[currentPage]);
 
-    nextButton.textContent = end === totalInputs ? 'Finish' : 'Next';
+    nextButton.textContent = currentPage === pageTitles.length - 1 ? 'Finish' : 'Next';
 }
 
-
 nextButton.addEventListener('click', () => {
-    if (currentPage * inputsPerPage + inputsPerPage < totalInputs) {
+    if (currentPage < pageTitles.length - 1) {
         currentPage++;
         updatePage();
     } else {
@@ -120,26 +89,39 @@ function processUserInputs(inputs) {
         }
     }
     console.log('All inputs are ready for submission');
-    // You can call submitInput() here if you want it to run automatically
-    // submitInput();
 }
 
 function submitInput() {
     const university = document.getElementById('userInput').value;
+
+    // Define multiplication factors for each input
+    const multiplicationFactors = {
+        'i1': 0.784, 'i2': 0.216, 'i3': 0.58, 'i4': 0.42, 'i5': 0.663, 
+        'i6': 0.337, 'i7': 0.701, 'i8': 0.299, 'i9': 0.193, 'i10': 0.257,
+        'i11': 0.427, 'i12': 0.123, 'i13': 0.552, 'i14': 0.448, 'i15': 0.58,
+        'i16': 0.264, 'i17': 0.176, 'i18': 1, 'i19': 1, 'i20': 0.465,
+        'i21': 0.535, 'i22': 0.291, 'i23': 0.422, 'i24': 0.266, 'i25': 0.589,
+        'i26': 0.411, 'i27': 1, 'i28': 1, 'i29': 1, 'i30': 0.241,
+        'i31': 0.322, 'i32': 0.18, 'i33': 0.114, 'i34': 0.143
+    };
+
     let sum = 0;
 
-    // Use the userInputs object instead of accessing DOM elements
+    // Loop through the inputs, multiply by the factor, and sum the results
     for (let i = 1; i <= 34; i++) {
         const value = userInputs[`i${i}`];
         if (value) {
-            sum += Number(value);
+            // Multiply the input value by its corresponding factor
+            const factor = multiplicationFactors[`i${i}`] || 1; // Default to 1 if no factor is defined
+            sum += Number(value) * factor;
         }
     }
-    
-    console.log('University:', university);
 
-    alert("University: " + university + " and the sum of values is: " + sum);
+    console.log('University:', university);
+    console.log('Sum of weighted values:', sum);
+    alert("University: " + university + " and the weighted sum of values is: " + sum);
 }
+
 
 // Initialize the first page
 updatePage();
